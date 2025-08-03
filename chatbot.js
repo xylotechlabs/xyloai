@@ -14,7 +14,7 @@ function sendMessage() {
   appendMessage("user", message);
   inputField.value = "";
 
-  let reply = "Sorry, I didn't understand that.";
+  let reply = "Sorry, this keyword is not present in my database.";
 
   for (const keyword in database) {
     if (message.includes(keyword)) {
