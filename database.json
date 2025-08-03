@@ -1,0 +1,11 @@
+{
+  "hello": "Hey there! How can I help you today?",
+  "bye": "Goodbye! Have a great day!",
+  "python": "Python is a popular programming language known for its simplicity and readability.",
+  "ai": "AI stands for Artificial Intelligence. It enables machines to mimic human intelligence.",
+  "weather": "I can't fetch real-time weather, but it’s always sunny in my code!",
+  "school": "School is a place where people go to learn new things.",
+  "robot": "A robot is a machine that can carry out a complex series of actions automatically.",
+  "smart": "Thank you! I try my best to be helpful.",
+  "chatbot": "I'm a simple keyword-based chatbot made with HTML, CSS, and JS!"
+}
