@@ -36,3 +36,9 @@ function appendMessage(sender, text) {
   chatbox.appendChild(msg);
   chatbox.scrollTop = chatbox.scrollHeight;
 }
+
+document.getElementById("userInput").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
