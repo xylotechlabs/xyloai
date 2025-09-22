@@ -7,7 +7,7 @@ A simple and free to use web based AI chatbot hosted using GitHub pages!
 3. Web based AI chatbot.
 
 # Try out now
-https://xylotechlabs.github.io/xyloai
+Click this link to try out the AI chatbot : https://xylotechlabs.github.io/xyloai
 
 # Contribute now
 Help us to expand the answering capabilities of this AI chatbot by contributing some simple sets of question and answers by emailing them on xylotechlabs@gmail.com 
