@@ -14,6 +14,9 @@ Help us to expand the answering capabilities of this AI chatbot by contributing 
 
 Note: Please study the database.json file to know how to contribute by studying how question and answer sets are written and how they work.
 
+# Disclaimer
+XyloAI may sometimes give answers that could cause anger or discomfort. Use responsibly.
+
 # Copyright Notice
 © 2025 Hillol Dutta Chaudhury. 
 All rights reserved.
