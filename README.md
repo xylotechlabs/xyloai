@@ -5,6 +5,7 @@ A simple and free to use web based AI chatbot hosted using GitHub pages!
 1. New NLP algorithm.
 2. API based search engine.
 3. Web based AI chatbot.
+4. Unlimited answering capabilities.
 
 # Try out now
 Click this link to try out the AI chatbot : https://xylotechlabs.github.io/xyloai
