@@ -1,21 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XyloAI</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      background: #4fc3f7;
+      color: #000;
+      font-weight: bold;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #03a9f4;
+      color: #fff;
+    }
+
+    pre {
+      text-align: left;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: rgba(0,0,0,0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      min-height: 80px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+  </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h2>XyloAI Version-1.0</h2>
-    <h3>A simple chatbot made by Xylo</h3>
-    <div id="chatbox" class="chatbox"></div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Type something..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
+
+  <div class="container">
+    <h1>XyloAI 2.0</h1>
+    <input id="q" placeholder="Ask me anything...">
+    <button onclick="ask()">Ask</button>
+    <pre id="reply">Try asking: “Who invented the computer?” or “How to make Biriyani?”</pre>
   </div>
-  <script src="chatbot.js"></script>
+
+  <footer>Made by Hillol Dutta Chaudhury (Xylo)</footer>
+
+  <script>
+  async function ask() {
+    const q = document.getElementById('q').value.trim().toLowerCase();
+    const reply = document.getElementById('reply');
+    if (!q) return reply.textContent = "Please type a question first.";
+    reply.textContent = "Thinking...";
+
+    let apiUrl = "", answer = "";
+
+    try {
+      if (q.startsWith("who") || q.startsWith("what") || q.startsWith("when") || q.startsWith("where")) {
+        apiUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(q)}&format=json`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        answer = data.AbstractText || data.RelatedTopics?.[0]?.Text || "I couldn't find an exact answer.";
+      }
+
+      else if (q.includes("how to") || q.startsWith("explain") || q.startsWith("tell me about")) {
+        const topic = q.replace(/^explain |^tell me about /, "").trim().replace(/\s+/g, "_");
+        apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic)}`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        answer = data.extract || "I couldn't find instructions for that.";
+      }
+
+      else if (q.includes("weather")) {
+        const placeMatch = q.match(/weather (in|at)?\s*(.*)/);
+        const place = placeMatch && placeMatch[2] ? placeMatch[2] : "your city";
+        apiUrl = `https://wttr.in/${encodeURIComponent(place)}?format=3`;
+        const res = await fetch(apiUrl);
+        answer = await res.text();
+      }
+
+      else if (q.match(/[\d+\-*/()%]/)) {
+        apiUrl = `https://api.mathjs.org/v4/?expr=${encodeURIComponent(q)}`;
+        const res = await fetch(apiUrl);
+        answer = await res.text();
+      }
+
+      else if (q.startsWith("define") || q.startsWith("meaning of")) {
+        const word = q.replace(/define |meaning of /, "").trim();
+        apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        answer = data[0]?.meanings?.[0]?.definitions?.[0]?.definition || "Couldn't find a definition.";
+      }
+
+      else {
+        answer = "Hmm... I’m not sure. Try asking factual, how-to, weather, or math questions!";
+      }
+    } catch (e) {
+      answer = "Error: Couldn't reach the database or got no response.";
+    }
+
+    reply.textContent = answer;
+  }
+  </script>
+
 </body>
 </html>
