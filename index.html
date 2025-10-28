@@ -28,14 +28,14 @@
     let apiUrl = "", answer = "";
 
     try {
-      if (q.startsWith("who") || q.startsWith("what") || q.startsWith("when") || q.startsWith("where")) {
+      if (q.startsWith("who") || q.startsWith("what") || q.startsWith("where")) {
         apiUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(q)}&format=json`;
         const res = await fetch(apiUrl);
         const data = await res.json();
         answer = data.AbstractText || data.RelatedTopics?.[0]?.Text || "I couldn't find an exact answer.";
       }
 
-      else if (q.includes("how to") || q.startsWith("explain") || || q.startsWith("what is") || q.startsWith("tell me about")) {
+      else if (q.includes("how to") || q.startsWith("explain") || q.startsWith("tell me about")) {
         const topic = q.replace(/^explain |^tell me about /, "").trim().replace(/\s+/g, "_");
         apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic)}`;
         const res = await fetch(apiUrl);
