@@ -9,7 +9,6 @@ async function ask() {
   if (!q) return reply.textContent = "Please type a question first.";
   reply.textContent = "Thinking...";
 
-  // emotion-based quick replies
   const emotionReplies = {
     "hi": "Hi there! How can I help you today?",
     "hello": "Hello! How can I help you today?",
@@ -18,8 +17,10 @@ async function ask() {
     "no": "Nope",
     "thanks": "You're welcome!",
     "thank you": "Glad to help!",
-    "sorry": "No worries 💫",
+    "sorry": "No worries",
     "idk": "That’s okay! Let’s find out together",
+    "who made you": "I was made by Mr. Hillol Dutta Chaudhury, also known as Xylo",
+    "who created you": "I was made by Mr. Hillol Dutta Chaudhury, also known as Xylo",
     "who are you": "I'm XyloAI — your friendly little smart assistant"
   };
 
