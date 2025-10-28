@@ -12,10 +12,11 @@
     <h1>XyloAI 2.0</h1>
     <input id="q" placeholder="Ask me anything...">
     <button onclick="ask()">Ask</button>
-    <pre id="reply">Try asking: “Who invented the computer?” or “How to make Biriyani?”</pre>
+    <pre id="reply">Try asking: “Weather at Raiganj” , “What is a phone?” or "5+2"</pre>
   </div>
 
   <footer>Made by Hillol Dutta Chaudhury (Xylo)</footer>
+  <footer>Styling (CSS) by ChatGPT</footer>
 
   <script>
   async function ask() {
@@ -34,7 +35,7 @@
         answer = data.AbstractText || data.RelatedTopics?.[0]?.Text || "I couldn't find an exact answer.";
       }
 
-      else if (q.includes("how to") || q.startsWith("explain") || q.startsWith("tell me about")) {
+      else if (q.includes("how to") || q.startsWith("explain") || || q.startsWith("what is") || q.startsWith("tell me about")) {
         const topic = q.replace(/^explain |^tell me about /, "").trim().replace(/\s+/g, "_");
         apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic)}`;
         const res = await fetch(apiUrl);
