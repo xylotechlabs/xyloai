@@ -2,79 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XyloAI</title>
+  <title>XyloAI Smart Search</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>XyloAI 2.0</h1>
-    <input id="q" placeholder="Ask me anything...">
-    <button onclick="ask()">Ask</button>
-    <pre id="reply">Try asking: “Weather at Raiganj” , “What is a phone?” or "5+2"</pre>
+  <h1>XyloAI 2.0</h1>
+
+  <div class="box">
+    <input id="q" placeholder="Ask me something...">
+    <button id="askBtn">Ask</button>
+    <pre id="reply">Try: "what is a computer"</pre>
   </div>
 
-  <footer>Made by Hillol Dutta Chaudhury (Xylo)</footer>
-  <footer>Styling (CSS) by ChatGPT</footer>
+  <p class="credit">Made by Hillol Dutta Chaudhury (Xylo)</p>
 
-  <script>
-  async function ask() {
-    const q = document.getElementById('q').value.trim().toLowerCase();
-    const reply = document.getElementById('reply');
-    if (!q) return reply.textContent = "Please type a question first.";
-    reply.textContent = "Thinking...";
-
-    let apiUrl = "", answer = "";
-
-    try {
-      if (q.startsWith("who") || q.startsWith("what") || q.startsWith("where")) {
-        apiUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(q)}&format=json`;
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        answer = data.AbstractText || data.RelatedTopics?.[0]?.Text || "I couldn't find an exact answer.";
-      }
-
-      else if (q.includes("how to") || q.startsWith("explain") || q.startsWith("tell me about")) {
-        const topic = q.replace(/^explain |^tell me about /, "").trim().replace(/\s+/g, "_");
-        apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic)}`;
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        answer = data.extract || "I couldn't find instructions for that.";
-      }
-
-      else if (q.includes("weather")) {
-        const placeMatch = q.match(/weather (in|at)?\s*(.*)/);
-        const place = placeMatch && placeMatch[2] ? placeMatch[2] : "your city";
-        apiUrl = `https://wttr.in/${encodeURIComponent(place)}?format=3`;
-        const res = await fetch(apiUrl);
-        answer = await res.text();
-      }
-
-      else if (q.match(/[\d+\-*/()%]/)) {
-        apiUrl = `https://api.mathjs.org/v4/?expr=${encodeURIComponent(q)}`;
-        const res = await fetch(apiUrl);
-        answer = await res.text();
-      }
-
-      else if (q.startsWith("define") || q.startsWith("meaning of")) {
-        const word = q.replace(/define |meaning of /, "").trim();
-        apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`;
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        answer = data[0]?.meanings?.[0]?.definitions?.[0]?.definition || "Couldn't find a definition.";
-      }
-
-      else {
-        answer = "Hmm... I’m not sure. Try asking factual, how-to, weather, or math questions!";
-      }
-    } catch (e) {
-      answer = "Error: Couldn't reach the database or got no response.";
-    }
-
-    reply.textContent = answer;
-  }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
