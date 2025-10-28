@@ -24,7 +24,7 @@ async function ask() {
   };
 
   for (let key in emotionReplies) {
-    if (q === key) {
+    if (q === key || q.includes(key)) {
       reply.textContent = emotionReplies[key];
       return;
     }
