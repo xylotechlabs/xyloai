@@ -19,8 +19,8 @@ async function ask() {
     "thank you": "Glad to help!",
     "sorry": "No worries",
     "idk": "That’s okay! Let’s find out together",
-    "who made you": "I was made by Mr. Hillol Dutta Chaudhury, also known as Xylo",
-    "who created you": "I was made by Mr. Hillol Dutta Chaudhury, also known as Xylo",
+    "who made you": "I was made by Mr Hillol Dutta Chaudhury - also known as Xylo",
+    "who created you": "I was made by Mr Hillol Dutta Chaudhury - also known as Xylo",
     "who are you": "I'm XyloAI — your friendly little smart assistant"
   };
 
