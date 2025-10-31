@@ -13,30 +13,46 @@ async function ask() {
     "hi": "Hi there! How can I help you today?",
     "hello": "Hello! How can I help you today?",
     "hey": "Hey! What’s up?",
-    "yes": "Yes, absolutely!",
-    "no": "Nope",
+    "bye": "Goodbye! See you soon!",
+    "goodbye": "Goodbye, Take care!",
+    "how are you": "I'm doing great! Thanks for asking.",
+    "good morning": "Good morning! Hope you have a wonderful day.",
+    "good night": "Good night! Sleep well 🌙",
     "thanks": "You're welcome!",
     "thank you": "Glad to help!",
-    "sorry": "No worries",
-    "idk": "That’s okay! Let’s find out together",
-    "who made you": "I was made by Mr Hillol Dutta Chaudhury - also known as Xylo",
-    "who created you": "I was made by Mr Hillol Dutta Chaudhury - also known as Xylo",
-    "who are you": "I'm XyloAI — your friendly little smart assistant"
+    "sorry": "No worries!",
+    "ok": "Okay!",
+    "okay": "Got it!",
+    "who is your creator": "I was made by Mr Hillol Dutta Chaudhury - also known as Xylo",
+    "who made you": "I was made by Mr Hillol Dutta Chaudhury — also known as Xylo.",
+    "who created you": "I was made by Mr Hillol Dutta Chaudhury — also known as Xylo.",
+    "who are you": "I'm XyloAI — your friendly little smart assistant.",
+    "what can you do": "I can tell weather, define words, calculate math, and answer basic questions!",
+    "idk": "That’s okay! Let’s find out together.",
+    "yes": "Yes, absolutely!",
+    "no": "Nope!",
+    "love you": "Aww! I love you too",
+    "miss you": "I’m right here with you!",
+    "haha": "That’s funny!",
+    "lol": "That's funny!",
+    "bye bye": "Bye bye! Take care!"
   };
-
+  
   for (let key in emotionReplies) {
-    if (q === key) {
+    const pattern = new RegExp(`\\b${key}\\b`, 'i'); // match whole word only
+    if (pattern.test(q)) {
       reply.textContent = emotionReplies[key];
       return;
     }
   }
 
-  let answer = "", apiUrl = "";
-
-  const cleaned = q
+  let cleaned = q
     .replace(/^(what is|who is|define|meaning of|explain|tell me about)\s+/i, "")
+    .replace(/\b(a|an|the)\b/g, "")   // remove filler words like 'a', 'an', 'the'
     .replace(/[?!.]+$/, "")
     .trim();
+
+  let answer = "", apiUrl = "";
 
   try {
     if (q.match(/[\d+\-*/()%]/)) {
