@@ -3,7 +3,7 @@ const hardcodedReplies = {
     "hi": "Hello! How can I help?",
     "hello": "Hi there!",
     "hey": "Hey! What’s up?",
-    "who made you": "I was created by Mr. Xylo!",
+    "who made you": "I was created by Mr. Hillol Dutta Chaudhury also known as Xylo",
     "what is your name": "My name is XyloAI!",
     "who are you": "I am XyloAI, a small smart assistant!",
     "how are you": "I'm fine! Thanks for asking.",
@@ -13,11 +13,11 @@ const hardcodedReplies = {
     "good morning": "Good morning!",
     "good night": "Good night!",
     "ok": "Okay!",
-    "who created you": "I was made by Mr. Xylo!",
-    "who is your owner": "Mr. Xylo owns me!",
+    "who created you": "I was made by Mr. Hillol Dutta Chaudhury also known as Xylo!",
+    "who is your owner": "Mr. Hillol Dutta Chaudhury also known as Xylo owns me!",
     "are you real": "I am a virtual assistant, so kind of!",
     "do you love me": "Haha! I like everyone!",
-    "what can you do": "I can answer questions, do math, search info, and more!"
+    "what can you do": "I can answer questions, do programming, do math, search info, and more!"
 };
 
 
