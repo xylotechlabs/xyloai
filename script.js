@@ -22,23 +22,27 @@ const hardcodedReplies = {
 
 
 function matchHardcodedReply(question) {
-    const q = question.toLowerCase().trim();
-
+    const q = question.toLowerCase();
+    const cleaned = q.replace(/[^a-z0-9\s]/g, "");
+    const tokens = cleaned.split(/\s+/);
+    const cleanSentence = tokens.join(" ").trim();
     for (const key in hardcodedReplies) {
-        
-        const safeKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-        
-        const pattern = new RegExp(`\\b${safeKey}\\b`, "i");
-
-        if (pattern.test(q)) {
+        const cleanKey = key.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
+        if (cleanSentence === cleanKey) {
+            return hardcodedReplies[key];
+        }
+    }
+    
+    for (const key in hardcodedReplies) {
+        const cleanKey = key.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
+        const keyWords = cleanKey.split(" ");
+        if (keyWords.every(w => tokens.includes(w))) {
             return hardcodedReplies[key];
         }
     }
 
     return null;
 }
-
 
 
 async function tryMath(question) {
