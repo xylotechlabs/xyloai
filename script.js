@@ -7,9 +7,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ reply: "API key missing!" });
     }
 
-    // ---------------------------
-    // 1. HARDCODED REPLIES
-    // ---------------------------
+
     const hardcoded = {
         "who made you": "I was proudly created by Mr Hillol Dutta Chaudhury also known as Xylo!",
         "who created you": "I was made by Mr Hillol Dutta Chaudhury also known as Xylo!",
@@ -44,9 +42,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ reply: mathAnswer.toString() });
     }
 
-    // ---------------------------
-    // 3. WEATHER TOOL
-    // ---------------------------
+
     async function weather(city) {
         try {
             const r = await fetch(`https://wttr.in/${city}?format=j1`);
@@ -64,9 +60,6 @@ export default async function handler(req, res) {
         if (w) return res.status(200).json({ reply: w });
     }
 
-    // ---------------------------
-    // 4. DUCKDUCKGO TOOL
-    // ---------------------------
     async function duck(text) {
         try {
             const r = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(text)}&format=json&no_redirect=1`);
@@ -79,9 +72,7 @@ export default async function handler(req, res) {
     const ddg = await duck(message);
     if (ddg) return res.status(200).json({ reply: ddg });
 
-    // ---------------------------
-    // 5. GROQ AI FALLBACK CHAIN
-    // ---------------------------
+
     async function ask(model) {
         try {
             const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
