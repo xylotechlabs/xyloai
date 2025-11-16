@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XyloAI</title>
-  <link rel="stylesheet" href="style.css">
+    <title>XyloAI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>XyloAI 2.0</h1>
+<div class="box">
+    <h2>XyloAI v3.0</h2>
 
-  <div class="box">
-    <input id="q" placeholder="Ask me something...">
-    <button id="askBtn">Ask</button>
-    <pre id="reply">Try asking: Explain computers</pre>
-  </div>
+    <div id="chat"></div>
 
-  <p class="credit">Made by Hillol Dutta Chaudhury (Xylo)</p>
+    <input id="input" type="text" placeholder="Ask me something..." />
+    <button onclick="sendMsg()">Send</button>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+
