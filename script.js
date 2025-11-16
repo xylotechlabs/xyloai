@@ -1,5 +1,5 @@
 
-const API_URL = "https://xyloai.vercel.app/api/chat.js";
+const API_URL = "https://xyloai.vercel.app/api/chat";
 
 const inputBox = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
