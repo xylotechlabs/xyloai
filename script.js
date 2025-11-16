@@ -1,5 +1,5 @@
 
-const API_URL = "https://xyloai.vercel.app/api/ai";
+const API_URL = "https://xyloai.vercel.app/api/chat.js";
 
 const inputBox = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
@@ -12,10 +12,9 @@ inputBox.addEventListener("keydown", function (e) {
     }
 });
 
-function addMessage(who, msg) {
-    const div = document.createElement("div");
+function addMsg(who, msg) {
+    let div = document.createElement("div");
     div.className = who === "ai" ? "aiMsg" : "userMsg";
-    // allow **bold** to work
     div.innerHTML = msg.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
     chatArea.appendChild(div);
     chatArea.scrollTop = chatArea.scrollHeight;
@@ -23,42 +22,33 @@ function addMessage(who, msg) {
 
 function sendMessage() {
     let text = inputBox.value.trim();
-    if (text === "") return;
+    if (!text) return;
 
-    addMessage("user", text);
+    addMsg("user", text);
     inputBox.value = "";
     askAI(text);
 }
 
 async function askAI(question) {
-    addMessage("ai", "Thinking...");
+    addMsg("ai", "Thinking...");
 
     try {
         const res = await fetch(API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ question: question })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question })
         });
 
         const data = await res.json();
 
-    
         chatArea.removeChild(chatArea.lastChild);
 
-        if (data.answer) {
-            addMessage("ai", data.answer);
-        } else {
-            addMessage("ai", "Sorry, I didn't get that.");
-        }
+        if (data.answer) addMsg("ai", data.answer);
+        else addMsg("ai", "Sorry, I didn't get that.");
 
-    } catch (err) {
-        console.error(err);
-
-        // remove “Thinking...” bubble
+    } catch (e) {
+        console.log(e);
         chatArea.removeChild(chatArea.lastChild);
-
-        addMessage("ai", "Oops! Something went wrong.");
+        addMsg("ai", "Error talking to server.");
     }
-            }
+}
