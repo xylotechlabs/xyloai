@@ -1,5 +1,5 @@
 
-const API_URL = "https://your-vercel-project.vercel.app/api/ai";
+const API_URL = "https://xyloai.vercel.app/api/ai";
 
 const inputBox = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
