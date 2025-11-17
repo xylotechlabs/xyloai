@@ -1,9 +1,9 @@
 # Information
 A simple and free to use web based AI chatbot hosted using GitHub pages!
 
-# Features (v2.0)
-1. New NLP algorithm.
-2. API based search engine.
+# Features (v3.0)
+1. New LLM backend.
+2. Can do programming and maths correctly.
 3. Web based AI chatbot.
 4. Unlimited answering capabilities.
 
